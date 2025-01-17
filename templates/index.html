@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поворот изображения</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <h1>Поворот изображения и анализ цветов</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="image">Загрузите изображение:</label>
+        <input type="file" name="image" id="image" required>
+        <br>
+        <label for="angle">Угол поворота (в градусах):</label>
+        <input type="number" name="angle" id="angle" required>
+        <br>
+        <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+        <br>
+        <button type="submit">Повернуть изображение</button>
+    </form>
+
+    {% if original_image %}
+        <h2>Исходное изображение</h2>
+        <img src="{{ url_for('static', filename='uploads/' + original_image) }}" alt="Исходное изображение">
+        <h2>Распределение цветов (исходное)</h2>
+        <img src="{{ url_for('static', filename='uploads/' + original_plot) }}" alt="Распределение цветов исходного изображения">
+        <h2>Повернутое изображение</h2>
+        <img src="{{ url_for('static', filename='uploads/' + rotated_image) }}" alt="Повернутое изображение">
+        <h2>Распределение цветов (повернутое)</h2>
+        <img src="{{ url_for('static', filename='uploads/' + rotated_plot) }}" alt="Распределение цветов повернутого изображения">
+    {% endif %}
+</body>
+</html>
