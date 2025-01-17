@@ -4,13 +4,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import requests
+from config import RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY, SECRET_KEY  # Импорт конфигурации
 
 app = Flask(__name__)
-app.secret_key = 'сюда добавим секретный ключ приложения'
-
-# Ключи Google reCAPTCHA
-RECAPTCHA_SITE_KEY = 'сюда вставим гугл капча сайт кей'
-RECAPTCHA_SECRET_KEY = 'сюда вставим гугл капча секретный ключ'
+app.secret_key = SECRET_KEY  # Используем секретный ключ из конфигурации
 
 # Папка для загруженных изображений
 UPLOAD_FOLDER = 'static/uploads'
@@ -18,7 +15,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Создаем папку, если она не существует
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
 
 def verify_recaptcha(response_token):
     """
@@ -31,7 +27,6 @@ def verify_recaptcha(response_token):
     response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
     result = response.json()
     return result.get('success', False)
-
 
 def plot_color_distribution(image, filename):
     """
@@ -50,7 +45,6 @@ def plot_color_distribution(image, filename):
     plt.ylabel('Количество пикселей')
     plt.savefig(filename)
     plt.close()
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -90,7 +84,6 @@ def index():
                                    recaptcha_site_key=RECAPTCHA_SITE_KEY)
 
     return render_template('index.html', recaptcha_site_key=RECAPTCHA_SITE_KEY)
-
 
 if __name__ == '__main__':
     app.run(debug=True)

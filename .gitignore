@@ -8,3 +8,5 @@ env/
 .vscode/
 .idea/
 static/uploads/
+config.py
+secret_key.txt
