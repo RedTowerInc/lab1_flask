@@ -13,3 +13,25 @@
    ```bash
    git clone https://github.com/RedTowerInc/lab1_flask.git
    cd lab1_flask
+
+2. Установите зависимости:
+   ```bash
+   pip install -r requirements.txt
+   
+3. Создайте файл config.py в корне проекта и добавьте в него следующие данные:
+   ```python
+   # Ключи Google reCAPTCHA
+   RECAPTCHA_SITE_KEY = 'ваш_recaptcha_site_key'
+   RECAPTCHA_SECRET_KEY = 'ваш_recaptcha_secret_key'
+   
+   # Секретный ключ Flask
+   SECRET_KEY = 'ваш_секретный_ключ'
+
+4. Запустите приложение:
+   ```bash
+   python app.py
+
+5. Откройте в браузере http://127.0.0.1:5000/
+
+### Авторы
+Андрей Мурзыков: Студент группы з-434П8-4.
